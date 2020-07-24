@@ -6,8 +6,8 @@ services:
     image: pszdldocker/stonkstracker
     ports:
     - '80'
-    working_dir: "/stonksomatic/src/algo_trading_monitor"
-    command: "gunicorn --bind 0.0.0.0:80 wsgi:server"
+    working_dir: "/stonksomatic/src"
+    command: "gunicorn --bind 0.0.0.0:80 algo_trading_monitor.wsgi:server"
 
   dev_web:
     image: pszdldocker/stonkstracker
@@ -25,3 +25,5 @@ services:
     - '80:80'
     depends_on:
       - prod_web
+    volumes:
+    - "./nginx.conf:/etc/nginx/nginx.conf"
