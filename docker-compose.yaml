@@ -2,10 +2,25 @@ version: '3.8'
 
 services:
 
-  # web:
+  prod_web:
+    image: pszdldocker/stonkstracker
+    ports:
+    - '80'
+    working_dir: "/stonksomatic/src/algo_trading_monitor"
+    command: "gunicorn --bind 0.0.0.0:80 wsgi:server"
+
+  dev_web:
+    image: pszdldocker/stonkstracker
+    build:
+      dockerfile: docker/dash-dockerfile
+    ports:
+      - '8050'
+    command: "python /stonksomatic/src/algo_trading_monitor/application.py"
 
 
   rev_proxy:
     image: "nginx:latest"
     ports:
     - '80:80'
+    depends_on:
+      - prod_web
