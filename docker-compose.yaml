@@ -12,9 +12,10 @@ services:
   dev_web:
     image: pszdldocker/stonkstracker
     build:
-      dockerfile: docker/dash-dockerfile
+      dockerfile: docker/dash.dockerfile
+      context: .
     ports:
-      - '8050'
+      - '8050:8050'
     command: "python /stonksomatic/src/algo_trading_monitor/application.py"
 
 
