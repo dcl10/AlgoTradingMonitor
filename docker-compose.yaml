@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+
+  # web:
+
+
+  rev_proxy:
+    image: "nginx:latest"
+    ports:
+    - '80:80'
