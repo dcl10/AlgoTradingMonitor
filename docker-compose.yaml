@@ -8,6 +8,7 @@ services:
     - '80'
     working_dir: "/stonksomatic/src"
     command: "gunicorn --bind 0.0.0.0:80 algo_trading_monitor.wsgi:server"
+    restart: 'always'
 
   dev_web:
     image: pszdldocker/stonkstracker
@@ -18,7 +19,6 @@ services:
       - '8050:8050'
     command: "python /stonksomatic/src/algo_trading_monitor/application.py"
 
-
   rev_proxy:
     image: "nginx:latest"
     ports:
@@ -27,3 +27,4 @@ services:
       - prod_web
     volumes:
     - "./nginx.conf:/etc/nginx/nginx.conf"
+    restart: always
